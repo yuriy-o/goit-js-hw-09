@@ -8,10 +8,6 @@ refs = {
   inputButton: document.querySelector('button[type="submit"]'),
 };
 
-// console.log(`delay: ${delay}, step: ${step}, amount: ${amount}`);
-// Notiflix.Notify.success(`delay: ${delay}, step: ${step}, amount: ${amount}`);
-// Notiflix.Notify.failure(`delay: ${delay}, step: ${step}, amount: ${amount}`);
-
 refs.form.addEventListener('submit', createPromise);
 
 function createPromise(position, delay) {
