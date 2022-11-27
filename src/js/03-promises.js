@@ -10,18 +10,18 @@ const refs = {
 
 refs.form.addEventListener('submit', createPromise);
 
-const inputDelay = Number(refs.inputDelay.value);
-const step = Number(refs.inputStep.value);
-const amount = refs.inputAmount.value;
-console.log(`'inputDelay': ${inputDelay}, 'step': ${step}`);
-
 function createPromise(position, delay) {
   position.preventDefault();
+
+  const delayValue = Number(refs.inputDelay.value);
+  const stepValue = Number(refs.inputStep.value);
+  const amount = refs.inputAmount.value;
+  console.log(`'delayValue': ${delayValue}, 'stepValue': ${stepValue}`);
 
   for (let i = 0; i < amount; i += 1) {
     console.log(`'amount': ${amount}, 'i': ${i}`);
 
-    const sumDelay = inputDelay + i * step;
+    const sumDelay = delayValue + i * stepValue;
 
     const promise = new Promise((resolve, reject) => {
       const shouldResolve = Math.random() > 0.3;
