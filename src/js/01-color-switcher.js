@@ -1,18 +1,16 @@
-refs = {
-  bodyEl: document.querySelector('body'),
-  btnStart: document.querySelector('button[data-start]'),
-  btnStop: document.querySelector('button[data-stop]'),
-  btnStartActive: document.querySelector('button[data-start].btn-active'),
-  btnStopActive: document.querySelector('button[data-stop].btn-active'),
-};
+const bodyEl = document.querySelector('body');
+const btnStart = document.querySelector('button[data-start]');
+const btnStop = document.querySelector('button[data-stop]');
+const btnStartActive = document.querySelector('button[data-start].btn-active');
+const btnStopActive = document.querySelector('button[data-stop].btn-active');
 // const viewColorBgr = document.querySelector('.view-color-bgr'); //!
 
 let timerId = null;
 
-refs.btnStart.addEventListener('click', clickOnStartButton);
-refs.btnStop.addEventListener('click', clickOnStopButton);
-refs.btnStartActive.addEventListener('mouseenter', newTextForStartButton);
-refs.btnStopActive.addEventListener('mouseenter', newTextForStopButton);
+btnStart.addEventListener('click', clickOnStartButton);
+btnStop.addEventListener('click', clickOnStopButton);
+btnStartActive.addEventListener('mouseenter', newTextForStartButton);
+btnStopActive.addEventListener('mouseenter', newTextForStopButton);
 
 const getRandomHexColor = () => {
   return `#${Math.floor(Math.random() * 16777215)
@@ -21,43 +19,43 @@ const getRandomHexColor = () => {
 };
 
 function changeBgc(color) {
-  refs.bodyEl.style.backgroundColor = color;
+  bodyEl.style.backgroundColor = color;
 }
 
 function clickOnStartButton() {
-  refs.btnStart.disabled = true;
-  refs.btnStop.disabled = false;
+  btnStart.disabled = true;
+  btnStop.disabled = false;
 
-  refs.btnStart.classList.remove('btn-active');
-  refs.btnStop.classList.add('btn-active');
+  btnStart.classList.remove('btn-active');
+  btnStop.classList.add('btn-active');
 
   timerId = setInterval(() => {
     changeBgc(getRandomHexColor());
   }, 1000);
 
-  refs.btnStart.removeEventListener('click', clickOnStartButton);
-  refs.btnStop.addEventListener('click', clickOnStopButton);
+  btnStart.removeEventListener('click', clickOnStartButton);
+  btnStop.addEventListener('click', clickOnStopButton);
 
-  refs.btnStartActive.removeEventListener('mouseenter', newTextForStartButton);
-  refs.btnStopActive.addEventListener('mouseenter', newTextForStopButton);
+  btnStartActive.removeEventListener('mouseenter', newTextForStartButton);
+  btnStopActive.addEventListener('mouseenter', newTextForStopButton);
 
   // btnStop.insertAdjacentHTML('afterend', showColor()); //!
 }
 
 function clickOnStopButton() {
-  refs.btnStop.disabled = true;
-  refs.btnStart.disabled = false;
+  btnStop.disabled = true;
+  btnStart.disabled = false;
 
-  refs.btnStop.classList.remove('btn-active');
-  refs.btnStart.classList.add('btn-active');
+  btnStop.classList.remove('btn-active');
+  btnStart.classList.add('btn-active');
 
   clearInterval(timerId);
 
-  refs.btnStart.addEventListener('click', clickOnStartButton);
-  refs.btnStop.removeEventListener('click', clickOnStopButton);
+  btnStart.addEventListener('click', clickOnStartButton);
+  btnStop.removeEventListener('click', clickOnStopButton);
 
-  refs.btnStopActive.removeEventListener('mouseenter', newTextForStopButton);
-  refs.btnStartActive.addEventListener('mouseenter', newTextForStartButton);
+  btnStopActive.removeEventListener('mouseenter', newTextForStopButton);
+  btnStartActive.addEventListener('mouseenter', newTextForStartButton);
 
   // viewColorBgr.remove(); //!
 }
@@ -68,10 +66,10 @@ function clickOnStopButton() {
 // }
 
 function newTextForStartButton() {
-  refs.btnStartActive.textContent = 'Слава Україні!';
-  refs.btnStopActive.textContent = 'Stop';
+  btnStartActive.textContent = 'Слава Україні!';
+  btnStopActive.textContent = 'Stop';
 }
 function newTextForStopButton() {
-  refs.btnStopActive.textContent = 'Смерть москалям!';
-  refs.btnStartActive.textContent = 'Start';
+  btnStopActive.textContent = 'Смерть москалям!';
+  btnStartActive.textContent = 'Start';
 }
