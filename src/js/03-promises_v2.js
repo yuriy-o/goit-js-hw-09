@@ -14,19 +14,7 @@ function onSubmitBtn(e) {
   const amount = Number(e.currentTarget.amount.value);
 
   for (let position = 0; position < amount; position += 1) {
-    createPromise(position, delay)
-      .then(({ position, delay }) => {
-        Notiflix.Notify.success(
-          `✅ Fulfilled promise ${position} in ${delay}ms`
-        );
-        console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-      })
-      .catch(({ position, delay }) => {
-        Notiflix.Notify.failure(
-          `❌ Rejected promise ${position} in ${delay}ms`
-        );
-        console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-      });
+    createPromise(position, delay).then(resolveMessage).catch(rejectMessage);
 
     delay += step;
   }
@@ -44,4 +32,14 @@ function createPromise(position, delay) {
       }
     }, delay);
   });
+}
+
+function resolveMessage({ position, delay }) {
+  Notiflix.Notify.success(`✅ Fulfilled promise ${position + 1} in ${delay}ms`);
+  console.log(`✅ Fulfilled promise ${position + 1} in ${delay}ms`);
+}
+
+function rejectMessage({ position, delay }) {
+  Notiflix.Notify.failure(`❌ Rejected promise ${position + 1} in ${delay}ms`);
+  console.log(`❌ Rejected promise ${position + 1} in ${delay}ms`);
 }
