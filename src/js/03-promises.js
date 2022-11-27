@@ -9,8 +9,8 @@ formEl.addEventListener('submit', createPromise);
 
 function createPromise(position, delay) {
   position.preventDefault();
-  const inputDelay = inputDelayEl.value;
-  const step = inputStepEl.value;
+  const inputDelay = Number(inputDelayEl.value);
+  const step = Number(inputStepEl.value);
   const amount = inputAmountEl.value;
   console.log(`'inputDelay': ${inputDelay}, 'step': ${step}`);
 
