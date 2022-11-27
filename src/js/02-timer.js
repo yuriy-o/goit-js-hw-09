@@ -2,18 +2,20 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 
-const inputEL = document.querySelector('#datetime-picker');
-const btnEL = document.querySelector('button[data-start]');
-const daysEL = document.querySelector('span[data-days]');
-const hoursEL = document.querySelector('span[data-hours]');
-const minutesEL = document.querySelector('span[data-minutes]');
-const secondsEL = document.querySelector('span[data-seconds]');
+const refs = {
+  input: document.querySelector('#datetime-picker'),
+  btn: document.querySelector('button[data-start]'),
+  days: document.querySelector('span[data-days]'),
+  hours: document.querySelector('span[data-hours]'),
+  minutes: document.querySelector('span[data-minutes]'),
+  seconds: document.querySelector('span[data-seconds]'),
+};
 
-btnEL.addEventListener('click', timer);
+refs.btn.addEventListener('click', timer);
 
 const dateNow = Date.now();
 
-const selectDate = flatpickr(inputEL, {
+const selectDate = flatpickr(refs.input, {
   enableTime: true,
   enableSeconds: true,
   time_24hr: true,
@@ -21,9 +23,9 @@ const selectDate = flatpickr(inputEL, {
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0].getTime() - dateNow > 0) {
-      btnEL.disabled = false;
+      refs.btn.disabled = false;
     } else if (selectedDates[0].getTime() - dateNow < 0) {
-      btnEL.disabled = true;
+      refs.btn.disabled = true;
 
       Notiflix.Report.failure(
         'Ми теж хочемо стрибнути в минуле...',
@@ -38,15 +40,15 @@ const selectDate = flatpickr(inputEL, {
     const { days, hours, minutes, seconds } = convertMs(deltaTime);
     // console.log(`${days}:${hours}:${minutes}:${seconds}`);
 
-    daysEL.textContent = days;
-    hoursEL.textContent = hours;
-    minutesEL.textContent = minutes;
-    secondsEL.textContent = seconds;
+    refs.days.textContent = days;
+    refs.hours.textContent = hours;
+    refs.minutes.textContent = minutes;
+    refs.seconds.textContent = seconds;
   },
 });
 
 function timer() {
-  btnEL.disabled = true;
+  refs.btn.disabled = true;
   const dateFuture = selectDate.selectedDates[0].getTime();
 
   const timerId = setInterval(() => {
@@ -67,10 +69,10 @@ function timer() {
 
     const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
-    daysEL.textContent = days;
-    hoursEL.textContent = hours;
-    minutesEL.textContent = minutes;
-    secondsEL.textContent = seconds;
+    refs.days.textContent = days;
+    refs.hours.textContent = hours;
+    refs.minutes.textContent = minutes;
+    refs.seconds.textContent = seconds;
   }, 1000);
 }
 

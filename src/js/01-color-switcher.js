@@ -1,16 +1,18 @@
-const bodyEl = document.querySelector('body');
-const btnStart = document.querySelector('button[data-start]');
-const btnStop = document.querySelector('button[data-stop]');
-const btnStartActive = document.querySelector('button[data-start].btn-active');
-const btnStopActive = document.querySelector('button[data-stop].btn-active');
+const refs = {
+  bodyEl: document.querySelector('body'),
+  btnStart: document.querySelector('button[data-start]'),
+  btnStop: document.querySelector('button[data-stop]'),
+  btnStartActive: document.querySelector('button[data-start].btn-active'),
+  btnStopActive: document.querySelector('button[data-stop].btn-active'),
+};
 // const viewColorBgr = document.querySelector('.view-color-bgr'); //!
 
 let timerId = null;
 
-btnStart.addEventListener('click', clickOnStartButton);
-btnStop.addEventListener('click', clickOnStopButton);
-btnStartActive.addEventListener('mouseenter', newTextForStartButton);
-btnStopActive.addEventListener('mouseenter', newTextForStopButton);
+refs.btnStart.addEventListener('click', clickOnStartButton);
+refs.btnStop.addEventListener('click', clickOnStopButton);
+refs.btnStartActive.addEventListener('mouseenter', newTextForStartButton);
+refs.btnStopActive.addEventListener('mouseenter', newTextForStopButton);
 
 const getRandomHexColor = () => {
   return `#${Math.floor(Math.random() * 16777215)
@@ -19,43 +21,43 @@ const getRandomHexColor = () => {
 };
 
 function changeBgc(color) {
-  bodyEl.style.backgroundColor = color;
+  refs.bodyEl.style.backgroundColor = color;
 }
 
 function clickOnStartButton() {
-  btnStart.disabled = true;
-  btnStop.disabled = false;
+  refs.btnStart.disabled = true;
+  refs.btnStop.disabled = false;
 
-  btnStart.classList.remove('btn-active');
-  btnStop.classList.add('btn-active');
+  refs.btnStart.classList.remove('btn-active');
+  refs.btnStop.classList.add('btn-active');
 
   timerId = setInterval(() => {
     changeBgc(getRandomHexColor());
   }, 1000);
 
-  btnStart.removeEventListener('click', clickOnStartButton);
-  btnStop.addEventListener('click', clickOnStopButton);
+  refs.btnStart.removeEventListener('click', clickOnStartButton);
+  refs.btnStop.addEventListener('click', clickOnStopButton);
 
-  btnStartActive.removeEventListener('mouseenter', newTextForStartButton);
-  btnStopActive.addEventListener('mouseenter', newTextForStopButton);
+  refs.btnStartActive.removeEventListener('mouseenter', newTextForStartButton);
+  refs.btnStopActive.addEventListener('mouseenter', newTextForStopButton);
 
   // btnStop.insertAdjacentHTML('afterend', showColor()); //!
 }
 
 function clickOnStopButton() {
-  btnStop.disabled = true;
-  btnStart.disabled = false;
+  refs.btnStop.disabled = true;
+  refs.btnStart.disabled = false;
 
-  btnStop.classList.remove('btn-active');
-  btnStart.classList.add('btn-active');
+  refs.btnStop.classList.remove('btn-active');
+  refs.btnStart.classList.add('btn-active');
 
   clearInterval(timerId);
 
-  btnStart.addEventListener('click', clickOnStartButton);
-  btnStop.removeEventListener('click', clickOnStopButton);
+  refs.btnStart.addEventListener('click', clickOnStartButton);
+  refs.btnStop.removeEventListener('click', clickOnStopButton);
 
-  btnStopActive.removeEventListener('mouseenter', newTextForStopButton);
-  btnStartActive.addEventListener('mouseenter', newTextForStartButton);
+  refs.btnStopActive.removeEventListener('mouseenter', newTextForStopButton);
+  refs.btnStartActive.addEventListener('mouseenter', newTextForStartButton);
 
   // viewColorBgr.remove(); //!
 }
@@ -66,10 +68,10 @@ function clickOnStopButton() {
 // }
 
 function newTextForStartButton() {
-  btnStartActive.textContent = 'Слава Україні!';
-  btnStopActive.textContent = 'Stop';
+  refs.btnStartActive.textContent = 'Слава Україні!';
+  refs.btnStopActive.textContent = 'Stop';
 }
 function newTextForStopButton() {
-  btnStopActive.textContent = 'Смерть москалям!';
-  btnStartActive.textContent = 'Start';
+  refs.btnStopActive.textContent = 'Смерть москалям!';
+  refs.btnStartActive.textContent = 'Start';
 }
