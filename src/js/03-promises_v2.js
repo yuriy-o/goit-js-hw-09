@@ -9,9 +9,10 @@ refs.form.addEventListener('submit', onSubmitBtn);
 function onSubmitBtn(e) {
   e.preventDefault();
 
-  let delay = Number(e.currentTarget.delay.value);
-  const step = Number(e.currentTarget.step.value);
-  const amount = Number(e.currentTarget.amount.value);
+  //! чому посилання працюють без elements?? Як краще використовувати??
+  let delay = Number(e.currentTarget.elements.delay.value);
+  const step = Number(e.currentTarget.elements.step.value);
+  const amount = Number(e.currentTarget.elements.amount.value);
 
   for (let position = 0; position < amount; position += 1) {
     createPromise(position, delay).then(resolveMessage).catch(rejectMessage);
