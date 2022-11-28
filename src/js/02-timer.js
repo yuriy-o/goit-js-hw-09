@@ -98,3 +98,6 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
+
+//! Перевірити цю можливість встановлювати атрибут
+//? startButtonRef.setAttribute('disabled', true);
